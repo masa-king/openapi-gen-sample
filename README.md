@@ -2,6 +2,9 @@
 
 OpenAPI定義とHTML生成のサンプルを格納する
 
+## Pages
+https://tgrhg.github.io/openapi-gen-sample/
+
 ## OpenAPIの記載について
 
 OpenAPIからコードを自動生成するにあたり、以下に気を付けてください。
