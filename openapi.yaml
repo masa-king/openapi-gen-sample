@@ -1,0 +1,162 @@
+openapi: 3.1.0
+info:
+  title: Sample API
+  description: API定義サンプル
+  version: 0.0.1
+
+security: []
+
+servers:
+  - url: http://localhost:8080/api
+    description: ローカル環境
+paths:
+  /users:
+    get:
+      tags:
+        - アカウント
+      summary: アカウント情報リスト取得
+      description: 指定された条件に一致するユーザーアカウント情報の一覧を取得する。
+      operationId: listUser
+      parameters:
+        - $ref: "#/components/parameters/prevId"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/orderBy"
+      responses:
+        "200":
+          description: アカウント情報とページネーション情報
+          content:
+            application/json:
+              schema:
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "schemas/User.yaml"
+                type: object
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+    post:
+      tags:
+        - アカウント
+      summary: アカウント情報登録
+      description: ユーザアカウント情報を登録する。
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "schemas/User.yaml"
+      responses:
+        "201":
+          description: アカウント情報
+          content:
+            application/json:
+              schema:
+                $ref: "schemas/User.yaml"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+  /users/{id}:
+    get:
+      tags:
+        - アカウント
+      summary: アカウント情報取得
+      description: 指定されたユーザアカウント情報を取得する。
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーID。ログインユーザの情報を取得したい場合は`self`を指定する。
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: ec00689e-3998-4df0-ae3e-416b052fafbd
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          description: アカウント情報
+          content:
+            application/json:
+              schema:
+                $ref: "schemas/User.yaml"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+    delete:
+      tags:
+        - アカウント
+      summary: アカウント情報削除
+      description: 指定されたユーザーアカウント情報を論理削除する。
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーID
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 13172964-de1e-41c4-88a2-bc600960f16b
+      responses:
+        "200":
+          $ref: "#/components/responses/OK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      tags:
+        - アカウント
+      summary: アカウント情報更新
+      description: |
+        指定されたユーザーアカウント情報を更新する。
+
+        ※リクエストボディで指定されていない属性の値は更新しない。
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: ユーザーID
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 13172964-de1e-41c4-88a2-bc600960f16b
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "schemas/User.yaml"
+      responses:
+        "200":
+          $ref: "#/components/responses/OK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+
+components:
+  responses:
+    OK:
+      description: 成功
+    Unauthorized:
+      description: 認証失敗
+    NotFound:
+      description: 見つからない
+    UnprocessableEntity:
+      description: バリデーションエラー
+    InternalServerError:
+      description: サーバー内部エラー

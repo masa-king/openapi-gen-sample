@@ -1,0 +1,44 @@
+title: ユーザー情報
+type: object
+properties:
+  id:
+    description: ユーザーID
+    type: string
+    format: uuid
+    readOnly: true
+    example: ec00689e-3998-4df0-ae3e-416b052fafbd
+  lastName:
+    description: 氏
+    type: string
+    example: 山田
+  firstName:
+    description: 名
+    type: string
+    example: 太郎
+  tel:
+    description: 電話番号
+    type: string
+    example: 090-1234-5678
+  email:
+    description: メールアドレス
+    type: string
+    example: test@mail.address.com
+  status:
+    $ref: "./enums/UserStatus.yaml"
+  password:
+    description: パスワード
+    type: string
+    writeOnly: true
+    example: password
+  createdAt:
+    description: 作成日時
+    type: string
+    format: date-time
+    readOnly: true
+    example: "2023-01-01T00:00:00+09:00"
+  updatedAt:
+    description: 更新日時
+    type: string
+    format: date-time
+    readOnly: true
+    example: "2023-01-01T00:00:00+09:00"

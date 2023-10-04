@@ -1,0 +1,15 @@
+title: ユーザーステータス
+type: string
+description: |
+  ステータス。
+  - `valid` - 有効
+  - `invalid` - 無効
+  - `deleted` - 退会済み
+enum: ["valid", "invalid", "deleted"]
+x-enum-varnames:
+  [
+    "VALID",
+    "INVALID",
+    "DELETED",
+  ]
+example: valid
