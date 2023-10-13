@@ -46,6 +46,8 @@ paths:
             schema:
               allOf:
                 - $ref: "schemas/User.yaml"
+                - required:
+                  - email
       responses:
         "201":
           description: ユーザー情報
@@ -131,7 +133,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "schemas/User.yaml"
+              allOf:
+                $ref: "schemas/User.yaml"
       responses:
         "200":
           $ref: "#/components/responses/OK"
