@@ -13,18 +13,13 @@ paths:
   /users:
     get:
       tags:
-        - アカウント
-      summary: アカウント情報リスト取得
-      description: 指定された条件に一致するユーザーアカウント情報の一覧を取得する。
+        - ユーザー
+      summary: ユーザー情報リスト取得
+      description: ユーザー情報の一覧を取得する。
       operationId: listUser
-      parameters:
-        - $ref: "#/components/parameters/prevId"
-        - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/fields"
-        - $ref: "#/components/parameters/orderBy"
       responses:
         "200":
-          description: アカウント情報とページネーション情報
+          description: ユーザー情報リスト
           content:
             application/json:
               schema:
@@ -40,9 +35,9 @@ paths:
           $ref: "#/components/responses/UnprocessableEntity"
     post:
       tags:
-        - アカウント
-      summary: アカウント情報登録
-      description: ユーザアカウント情報を登録する。
+        - ユーザー
+      summary: ユーザー情報登録
+      description: ユーザユーザー情報を登録する。
       operationId: createUser
       requestBody:
         required: true
@@ -53,7 +48,7 @@ paths:
                 - $ref: "schemas/User.yaml"
       responses:
         "201":
-          description: アカウント情報
+          description: ユーザー情報
           content:
             application/json:
               schema:
@@ -65,23 +60,22 @@ paths:
   /users/{id}:
     get:
       tags:
-        - アカウント
-      summary: アカウント情報取得
-      description: 指定されたユーザアカウント情報を取得する。
+        - ユーザー
+      summary: ユーザー情報取得
+      description: 指定されたユーザユーザー情報を取得する。
       operationId: getUser
       parameters:
         - name: id
           in: path
-          description: ユーザーID。ログインユーザの情報を取得したい場合は`self`を指定する。
+          description: ユーザーID。自身の情報を取得したい場合は`self`を指定する。
           required: true
           schema:
             type: string
             format: uuid
-          example: ec00689e-3998-4df0-ae3e-416b052fafbd
-        - $ref: "#/components/parameters/fields"
+            example: ec00689e-3998-4df0-ae3e-416b052fafbd
       responses:
         "200":
-          description: アカウント情報
+          description: ユーザー情報
           content:
             application/json:
               schema:
@@ -94,9 +88,9 @@ paths:
           $ref: "#/components/responses/UnprocessableEntity"
     delete:
       tags:
-        - アカウント
-      summary: アカウント情報削除
-      description: 指定されたユーザーアカウント情報を論理削除する。
+        - ユーザー
+      summary: ユーザー情報削除
+      description: 指定されたユーザーユーザー情報を削除する。
       operationId: deleteUser
       parameters:
         - name: id
@@ -106,7 +100,7 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 13172964-de1e-41c4-88a2-bc600960f16b
+          example: c80f097d-2033-f09f-46d3-54ce1a559f83
       responses:
         "200":
           $ref: "#/components/responses/OK"
@@ -116,10 +110,10 @@ paths:
           $ref: "#/components/responses/NotFound"
     patch:
       tags:
-        - アカウント
-      summary: アカウント情報更新
+        - ユーザー
+      summary: ユーザー情報更新
       description: |
-        指定されたユーザーアカウント情報を更新する。
+        指定されたユーザーユーザー情報を更新する。
 
         ※リクエストボディで指定されていない属性の値は更新しない。
       operationId: updateUser
@@ -131,7 +125,7 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 13172964-de1e-41c4-88a2-bc600960f16b
+          example: c80f097d-2033-f09f-46d3-54ce1a559f83
       requestBody:
         required: true
         content:
@@ -158,5 +152,3 @@ components:
       description: 見つからない
     UnprocessableEntity:
       description: バリデーションエラー
-    InternalServerError:
-      description: サーバー内部エラー
