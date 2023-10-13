@@ -133,8 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                $ref: "schemas/User.yaml"
+              $ref: "schemas/User.yaml"
       responses:
         "200":
           $ref: "#/components/responses/OK"
