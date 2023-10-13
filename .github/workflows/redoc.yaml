@@ -21,11 +21,11 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: install redoc
-        run: npm install -g redoc-cli
+        run: npm install -g @redocly/cli
 
       - name: build open api
         run: |
-          redoc-cli build ./openapi.yaml
+          redocly build-docs ./openapi.yaml
           mkdir ./public
           mv ./redoc-static.html ./public/index.html
   
