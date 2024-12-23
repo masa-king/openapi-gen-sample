@@ -37,7 +37,7 @@ paths:
       tags:
         - ユーザー
       summary: ユーザー情報登録
-      description: ユーザユーザー情報を登録する。
+      description: ユーザー情報を登録する。
       operationId: createUser
       requestBody:
         required: true
@@ -64,7 +64,7 @@ paths:
       tags:
         - ユーザー
       summary: ユーザー情報取得
-      description: 指定されたユーザユーザー情報を取得する。
+      description: 指定されたユーザー情報を取得する。
       operationId: getUser
       parameters:
         - name: id
