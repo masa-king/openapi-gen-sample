@@ -92,7 +92,7 @@ paths:
       tags:
         - ユーザー
       summary: ユーザー情報削除
-      description: 指定されたユーザーユーザー情報を削除する。
+      description: 指定されたユーザー情報を削除する。
       operationId: deleteUser
       parameters:
         - name: id
@@ -115,7 +115,7 @@ paths:
         - ユーザー
       summary: ユーザー情報更新
       description: |
-        指定されたユーザーユーザー情報を更新する。
+        指定されたユーザー情報を更新する。
 
         ※リクエストボディで指定されていない属性の値は更新しない。
       operationId: updateUser
